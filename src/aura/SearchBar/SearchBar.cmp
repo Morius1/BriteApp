@@ -1,0 +1,159 @@
+<aura:component description="SearchBar" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="searchData" type="String" />
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="selectedValue" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.loadOptions}" />
+    <div class="slds-m-top_medium slds-m-bottom_x-large">
+<!--    <div class="slds-m-top_medium slds-m-bottom_x-large" style="margin-left: 50px; margin-right: 50px;">-->
+
+        <!-- Default/basic -->
+        <div class="slds-p-around_medium lgc-bg">
+<!--            <lightning:select class="search__select" name="select" label="Movies/Actors" aura:id="select">-->
+<!--                <aura:iteration items="{!v.options}" var="item">-->
+<!--                    <option value="{!item.valueS}" selected="{!item.selected}">{!item.valueS}</option>-->
+<!--                </aura:iteration>-->
+<!--            </lightning:select>-->
+<!--            <lightning:input class="search__input" value="{!v.searchData}" onchange="{!c.setSearch}" type="text" label="Enter some text"/>-->
+<!--            <div style=" float: left;">-->
+<!--            <lightning:button onclick="{!c.showFavourite}" class="slds-button slds-button_success" title="Search" value="btn" name="button" >Favourite</lightning:button>-->
+<!--            <lightning:button onclick="{!c.showBlackList}" class="slds-button slds-button_destructive" title="Search" value="btn" name="button" >Black List</lightning:button>-->
+<!--            </div>-->
+            <div class="slds-align_absolute-center" style="margin-right:-200px;">
+                <select class="search__select" name="select" id="select" aura:id="select">
+                    <aura:iteration items="{!v.options}" var="item">
+                        <option value="{!item.valueS}" selected="{!item.selected}">{!item.valueS}</option>
+                    </aura:iteration>
+                </select>
+                <input id="input" aura:id="input" class="search__input" value="{!v.searchData}" type="search" name="search" maxlength="100" placeholder="I am looking for..." />
+                <button class="search__btn-submit" onclick="{!c.setSearch}" type="submit">Search</button>
+                <div style="margin-left: 200px;">
+                    <button onclick="{!c.showFavourite}" style="margin-right: 5px;" class="search__btn-submit">Favourite</button>
+                    <button onclick="{!c.showBlackList}" style="margin-right: 5px;" class="search__btn-submit">Black List</button>
+                    <button onclick="{!c.showUserMovies}" class="search__btn-submit">My Movies Status</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+    <aura:html tag="style">
+        /**
+        * Search styles
+        */
+        ::placeholder { /* Most modern browsers support this now. */
+        color: #b5b5b5;
+        }
+        .search__form {
+        display: flex !important;
+        }
+        .search--large .search__input {
+        padding: 30px !important;
+        }
+        .search--large .search__btn-submit {
+        padding: 30px !important;
+        }
+        .search--swap .search__input {
+        order: 1 !important;
+        }
+        .search--icon .search__form {
+        position: relative !important;
+        }
+        .search--icon .search__btn-submit {
+        position: absolute !important;
+        right: 0 !important;
+        top: 0 !important;
+        padding: 0 !important;
+        width: 46px !important;
+        height: 100% !important;
+        background: none !important;
+        }
+        .search--icon .search__btn-submit:focus, .search--icon .search__btn-submit:active, .search--icon .search__btn-submit:hover {
+        box-shadow: none !important;
+        }
+        .search--icon .search__btn-submit:focus:before, .search--icon .search__btn-submit:active:before, .search--icon .search__btn-submit:hover:before {
+        border-color: #eee !important;
+        }
+        .search--icon .search__btn-submit:focus:after, .search--icon .search__btn-submit:active:after, .search--icon .search__btn-submit:hover:after {
+        background-color: #eee !important;
+        }
+        .search--icon .search__btn-submit:before, .search--icon .search__btn-submit:after {
+        content: '' !important;
+        position: absolute !important;
+        transition: background-color 200ms ease-out, border-color 200ms ease-out !important;
+        }
+        .search--icon .search__btn-submit:before {
+        right: 8px !important;
+        top: 8px !important;
+        width: 16px !important;
+        height: 16px !important;
+        border: 3px solid #666 !important;
+        border-radius: 100% !important;
+        }
+        .search--icon .search__btn-submit:after {
+        right: 30px !important;
+        top: 23px !important;
+        width: 3px !important;
+        height: 16px !important;
+        background-color: #666 !important;
+        transform: rotate(45deg) !important;
+        }
+        .search--icon .search__btn-submit:hover {
+        background: none !important;
+        }
+        .search--icon-expandable .search__input {
+        transform: scaleX(0) !important;
+        transform-origin: right center !important;
+        transition: transform 300ms ease-out !important;
+        }
+        .search--icon-expandable .search__input:focus, .search--icon-expandable .search__input:active {
+        transform: scaleX(1) !important;
+        }
+        .search--icon-expandable .search__btn-submit {
+        background-color: #333 !important;
+        }
+        .search--icon-expandable .search__btn-submit:hover {
+        background-color: #333 !important;
+        }
+        .search--expanded .search__input {
+        transform: scaleX(1) !important;
+        }
+        .search__input:focus, .search__btn-submit:focus, .search__input:active, .search__btn-submit:active {
+        outline: 0 !important;
+        box-shadow: 0 0 16px rgba(255, 255, 255, 0.5) !important;
+        }
+        .search__input {
+        float:left !important;
+        padding: 15px !important;
+        width: 600px !important;
+        color: #eee !important;
+        font-size: 14px !important;
+        background-color: #5E5E5E !important;
+        border: 0 !important;
+        }
+        .search__select {
+        padding: 14px 5px !important;
+        width: 100px !important;
+        color: #eee !important;
+        font-size: 14px !important;
+        background-color: #5E5E5E !important;
+        border: 0 !important;
+        float: left !important;
+        }
+        .search__btn-submit {
+        float:left !important;
+        padding: 15px !important;
+        color: #fff !important;
+        font-size: 13px !important;
+        background-color: #919191 !important;
+        border: 0 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        cursor: pointer !important;
+        z-index: 10 !important;
+        transition: background-color 200ms ease-out !important;
+        }
+        .search__btn-submit:hover {
+        background-color: #777 !important;
+        }
+
+    </aura:html>
+</aura:component>

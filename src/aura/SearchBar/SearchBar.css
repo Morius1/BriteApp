@@ -1,0 +1,118 @@
+/**
+ * Created by BRITENET on 07.09.2021.
+ */
+/**
+ * Search styles
+ */
+.THIS.search__form {
+  display: flex;
+}
+.THIS.search--large .search__input {
+  padding: 30px;
+}
+.THIS.search--large .search__btn-submit {
+  padding: 30px;
+}
+.THIS.search--swap .search__input {
+  order: 1;
+}
+.THIS.search--icon .search__form {
+  position: relative;
+}
+.THIS.search--icon .search__btn-submit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0;
+  width: 46px;
+  height: 100%;
+  background: none;
+}
+.THIS.search--icon .search__btn-submit:focus,.THIS .search--icon .search__btn-submit:active,.THIS .search--icon .search__btn-submit:hover {
+  box-shadow: none;
+}
+.THIS.search--icon .search__btn-submit:focus:before,.THIS .search--icon .search__btn-submit:active:before,.THIS .search--icon .search__btn-submit:hover:before {
+  border-color: #eee;
+}
+.THIS.search--icon .search__btn-submit:focus:after,.THIS .search--icon .search__btn-submit:active:after,.THIS .search--icon .search__btn-submit:hover:after {
+  background-color: #eee;
+}
+.THIS.search--icon .search__btn-submit:before,.THIS .THIS.search--icon .search__btn-submit:after {
+  content: '';
+  position: absolute;
+  transition: background-color 200ms ease-out, border-color 200ms ease-out;
+}
+.THIS.search--icon .search__btn-submit:before {
+  right: 8px;
+  top: 8px;
+  width: 16px;
+  height: 16px;
+  border: 3px solid #666;
+  border-radius: 100%;
+}
+.THIS.search--icon .search__btn-submit:after {
+  right: 30px;
+  top: 23px;
+  width: 3px;
+  height: 16px;
+  background-color: #666;
+  transform: rotate(45deg);
+}
+.THIS.search--icon .search__btn-submit:hover {
+  background: none;
+}
+.THIS.search--icon-expandable .search__input {
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 300ms ease-out;
+}
+.THIS.search--icon-expandable .search__input:focus,.THIS .search--icon-expandable .search__input:active {
+  transform: scaleX(1);
+}
+.THIS.search--icon-expandable .search__btn-submit {
+  background-color: #333;
+}
+.THIS.search--icon-expandable .search__btn-submit:hover {
+  background-color: #333;
+}
+.THIS.search--expanded .search__input {
+  transform: scaleX(1);
+}
+.THIS.search__input:focus,.THIS .search__btn-submit:focus,.THIS .search__input:active,.THIS .search__btn-submit:active {
+  outline: 0;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.5);
+}
+.THIS.search__input {
+  float:left;
+  padding: 15px;
+  width: 600px;
+  color: #eee;
+  font-size: 14px;
+  background-color: #333;
+  border: 0;
+}
+.THIS.search__select {
+  padding: 14px 5px;
+  width: 100px;
+  color: #eee;
+  font-size: 14px;
+  background-color: #333;
+  border: 0;
+  float: left;
+}
+.THIS.search__btn-submit {
+  float:left;
+  padding: 16px;
+  color: #eee;
+  font-size: 13px;
+  background-color: #C6C6C6;
+  border: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 200ms ease-out;
+}
+.THIS.search__btn-submit:hover {
+  background-color: #777;
+}
