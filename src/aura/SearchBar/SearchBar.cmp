@@ -21,7 +21,7 @@
             <div class="slds-align_absolute-center" style="margin-right:-200px;">
                 <select class="search__select" name="select" id="select" aura:id="select">
                     <aura:iteration items="{!v.options}" var="item">
-                        <option value="{!item.valueS}" selected="{!item.selected}">{!item.valueS}</option>
+                        <option value="{!item.valueS}" selected="{!item.selected}"> {!item.valueS}</option>
                     </aura:iteration>
                 </select>
                 <input id="input" aura:id="input" class="search__input" value="{!v.searchData}" type="search" name="search" maxlength="100" placeholder="I am looking for..." />
